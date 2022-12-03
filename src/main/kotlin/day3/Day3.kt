@@ -35,22 +35,12 @@ private fun getItemPriority(it: Char): Int =
 // part 2
 
 private fun part2(lines: List<String>) {
-    val elvesGroups = getElvesGroups(lines)
 
-    val badges = elvesGroups.map { group ->
-        group[0].first { group[1].contains(it) && group[2].contains(it) }
-    }
-
-    val badgesPriorities = badges.map { getItemPriority(it) }
+    val badgesPriorities = lines
+        .chunked(3)
+        .map { group ->
+            group[0].first { group[1].contains(it) && group[2].contains(it) }
+        }.map { getItemPriority(it) }
 
     println("Sum of badges priorities ${badgesPriorities.sum()}")
 }
-
-private fun getElvesGroups(lines: List<String>): List<List<String>> =
-    lines.fold(arrayListOf<ArrayList<String>>().apply { add(arrayListOf()) }) { groups, line ->
-        if (groups[groups.lastIndex].size >= 3) {
-            groups.add(arrayListOf())
-        }
-        groups[groups.lastIndex].add(line)
-        groups
-    }
