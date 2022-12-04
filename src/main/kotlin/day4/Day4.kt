@@ -4,18 +4,21 @@ import util.readFile
 
 fun main() {
 
-    val lines = readFile("day4/input.txt")
+    val testLines = readFile("day4/input_test.txt")
+    check(part1(testLines) == 2)
+    check(part2(testLines) == 4)
 
-    part1(lines)
-    part2(lines)
+    val lines = readFile("day4/input.txt")
+    println("Number of sections that fully overlaps: ${part1(lines)}")
+    println("Number of sections that overlaps: ${part2(lines)}")
 }
 
 // part 1
-private fun part1(lines: List<String>) {
-    lines.filter { line ->
+private fun part1(lines: List<String>): Int {
+    return lines.count { line ->
         val sections = parseSections(line)
         isFullOverlap(sections[0], sections[1])
-    }.let { println("Number of sections that fully overlaps: ${it.size}") }
+    }
 }
 
 private fun parseSections(line: String) = line
@@ -24,19 +27,18 @@ private fun parseSections(line: String) = line
         it.substringBefore('-').toInt() to it.substringAfter('-').toInt()
     }
 
-private fun isFullOverlap(section1: Pair<Int, Int>, section2: Pair<Int, Int>) =
-    (section1.first >= section2.first && section1.second <= section2.second)
-            || (section1.first <= section2.first && section1.second >= section2.second)
+private fun isFullOverlap(firstRange: Pair<Int, Int>, secondRange: Pair<Int, Int>) =
+    (firstRange.first >= secondRange.first && firstRange.second <= secondRange.second)
+            || (firstRange.first <= secondRange.first && firstRange.second >= secondRange.second)
 
 // part 2
-private fun part2(lines: List<String>) {
-    lines.filter { line ->
+private fun part2(lines: List<String>): Int {
+    return lines.count { line ->
         val sections = parseSections(line)
         isOverlap(sections[0], sections[1])
-    }.let { println("Number of sections that overlaps: ${it.size}") }
+    }
 }
 
-private fun isOverlap(section1: Pair<Int, Int>, section2: Pair<Int, Int>) =
-    (section2.first <= section1.first && section1.first <= section2.second)
-            || (section2.first <= section1.second && section1.first <= section2.second)
-
+private fun isOverlap(firstRange: Pair<Int, Int>, secondRange: Pair<Int, Int>) =
+    firstRange.first in secondRange.first..secondRange.second
+            || secondRange.first in firstRange.first..firstRange.second
