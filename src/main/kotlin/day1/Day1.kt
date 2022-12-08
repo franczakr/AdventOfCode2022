@@ -1,10 +1,10 @@
 package day1
 
-import util.readFile
+import util.readLines
 
 fun main() {
 
-    val lines = readFile("day1/input.txt")
+    val lines = readLines("day1/input.txt")
 
     val caloriesSums = lines.fold(arrayListOf<Int>().apply { add(0) }) { result, line ->
         if (line.isBlank())

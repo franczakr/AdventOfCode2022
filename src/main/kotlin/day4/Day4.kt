@@ -1,14 +1,14 @@
 package day4
 
-import util.readFile
+import util.readLines
 
 fun main() {
 
-    val testLines = readFile("day4/input_test.txt")
+    val testLines = readLines("day4/input_test.txt")
     check(part1(testLines) == 2)
     check(part2(testLines) == 4)
 
-    val lines = readFile("day4/input.txt")
+    val lines = readLines("day4/input.txt")
     println("Number of sections that fully overlaps: ${part1(lines)}")
     println("Number of sections that overlaps: ${part2(lines)}")
 }

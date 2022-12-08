@@ -1,17 +1,17 @@
 package day5
 
-import util.readFile
+import util.readLines
 import java.util.*
 import kotlin.collections.ArrayDeque
 import kotlin.math.ceil
 
 fun main() {
 
-    val testLines = readFile("day5/input_test.txt")
+    val testLines = readLines("day5/input_test.txt")
     check(part1(testLines) == "CMZ")
     check(part2(testLines) == "MCD")
 
-    val lines = readFile("day5/input.txt")
+    val lines = readLines("day5/input.txt")
     println("[Part 1] Crates on top of stacks are: ${part1(lines)}")
     println("[Part 2] Crates on top of stacks are: ${part2(lines)}")
 }

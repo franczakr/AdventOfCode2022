@@ -2,4 +2,7 @@ package util
 
 import java.io.File
 
-fun readFile(fileName: String) = File("src/main/kotlin/$fileName").readLines()
+fun readLines(fileName: String) = File(getFileName(fileName)).readLines()
+fun readText(fileName: String) = File(getFileName(fileName)).readText()
+
+private fun getFileName(fileName: String) = "src/main/kotlin/$fileName"

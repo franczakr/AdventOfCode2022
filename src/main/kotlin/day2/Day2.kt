@@ -1,9 +1,9 @@
 package day2
 
-import util.readFile
+import util.readLines
 
 fun main() {
-    val lines = readFile("day2/input.txt")
+    val lines = readLines("day2/input.txt")
     part1(lines)
     part2(lines)
 }
