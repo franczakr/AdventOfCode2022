@@ -12,14 +12,11 @@ object DirectoriesSizeCalculator {
         dirs = mutableMapOf()
         currentPath = ROOT
         for (line in lines) {
-            if (line.startsWith("$ ")) {
-                processCommand(line)
-            } else if (line.matches("^\\d+.*".toRegex())) {
-                processNewFile(line)
-            } else if (line.startsWith("dir ")) {
-                continue
-            } else {
-                error("Unexpected line")
+            when {
+                line.startsWith("$ ") -> processCommand(line)
+                line.matches("^\\d+.*".toRegex()) -> processNewFile(line)
+                line.startsWith("dir ") -> continue
+                else -> error("Unexpected line")
             }
         }
         return dirs
