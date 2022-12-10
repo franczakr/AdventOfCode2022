@@ -4,7 +4,6 @@ package day9
 
 import util.readLines
 import java.util.*
-import java.util.stream.IntStream
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -54,7 +53,7 @@ private fun part1(lines: List<String>): Int {
     lines.forEach { line ->
         val (direction, count) = line.split(" ")
 
-        for (i in 1..count.toInt()) {
+        repeat(count.toInt()) {
             head.move(direction)
             if (tail.distanceTo(head) > 1) {
                 tail.moveTo(head)
@@ -67,18 +66,18 @@ private fun part1(lines: List<String>): Int {
 
 // part 2
 private fun part2(lines: List<String>): Int {
-    val rope = IntStream.rangeClosed(1, 10).mapToObj { Node(0, 0) }.toList()
+    val rope = MutableList(10) { Node(0, 0) }
 
     val visited: MutableSet<Pair<Int, Int>> = mutableSetOf()
 
     lines.forEach { line ->
         val (direction, count) = line.split(" ")
 
-        for (i in 1..count.toInt()) {
+        repeat(count.toInt()) {
             rope[0].move(direction)
-            for (n in 1..rope.lastIndex) {
-                if (rope[n].distanceTo(rope[n - 1]) > 1) {
-                    rope[n].moveTo(rope[n - 1])
+            for (i in 1..rope.lastIndex) {
+                if (rope[i].distanceTo(rope[i - 1]) > 1) {
+                    rope[i].moveTo(rope[i - 1])
                 }
             }
             visited.add(rope[rope.lastIndex].let { Pair(it.x, it.y) })
