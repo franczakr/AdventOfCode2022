@@ -87,7 +87,7 @@ fun part2(lines: List<String>): Int {
     }.maxOf { getScenicScore(treesMap, it.first, it.second, it.third) }
 }
 
-fun getScenicScore(treesMap: List<List<Int>>, row: Int, column: Int, height: Int): Int {
+private fun getScenicScore(treesMap: List<List<Int>>, row: Int, column: Int, height: Int): Int {
     return getScoreUp(treesMap, row, column, height) *
             getScoreDown(treesMap, row, column, height) *
             getScoreLeft(treesMap, row, column, height) *
